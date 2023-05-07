@@ -20,14 +20,17 @@ public class ExoPlanetService {
         this.exoPlanets = exoPlanets;
     }
 
+    //Fetches the count of Orphan planets
     public long getOrphanPlanetsCount(ExoPlanet[] exoPlanets){
         return Arrays.stream(exoPlanets).filter(planet->planet.getTypeFlag()==3).count();
     }
 
+    //Fetches the name of the planet orbiting the hottest star
     public String getHottestStarPlanet(ExoPlanet[] exoPlanets){
         return Arrays.stream(exoPlanets).max(Comparator.comparingDouble(exoPlanet-> Optional.ofNullable(exoPlanet.getHostStarTempK()).orElse(0.0))).get().getPlanetIdentifier();
     }
 
+    //Fetches the timeline data
     public StringBuilder getTimelineData(ExoPlanet[] exoPlanets) {
         StringBuilder result =new StringBuilder("");
         AtomicLong smallCount = new AtomicLong();

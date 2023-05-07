@@ -32,6 +32,8 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException, ParseException {
+        
+        //Fetching the Json array data set and mapping it to ExoPlanet Pojo Object
         URL url = new URL(ExoPlanetConstants.DATA_URL);
         JSONParser parser = new JSONParser();
         JSONArray array = (JSONArray) parser.parse(new InputStreamReader(url.openStream()));
@@ -39,6 +41,8 @@ public class Main {
         ExoPlanet[] exoPlanets = mapper.readValue(array.toJSONString(), ExoPlanet[].class);
 
         planetService = new ExoPlanetService(exoPlanets);
+        
+        //Displaying the required information of the planets
         displayOrphanPlanetsCount(planetService,exoPlanets);
         displayHottestStarPlanet(planetService,exoPlanets);
         displayTimelineData(planetService,exoPlanets);
